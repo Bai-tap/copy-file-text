@@ -2,54 +2,35 @@ import java.io.*;
 
 public class CopyFileText {
     public static void main(String[] args) {
-        CopyFileText copyFileText = new CopyFileText();
-
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("F:/target.txt"));
-
-            writer.write(copyFileText.readFileText("F:/resource.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            CopyFileText resource = new CopyFileText();
+            String line = resource.readFileText("F:/resource.txt");
+            File target = new File("F:/target.txt");
+            FileWriter fw = new FileWriter(target);
+            fw.write(line);
+            fw.close();
+            System.out.println(fw);
+        } catch (Exception e) {
+            System.err.println("WTF");
         }
+
+
     }
 
-    public String readFileText(String filePath) {
-        try {
-            File file = new File(filePath);
+    public String readFileText(String filePath) throws Exception {
+        File file = new File(filePath);
 
-            if (!file.exists()) {
-                throw new FileNotFoundException();
-            }
-
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                String string = line;
-            }
-
-            br.close();
-            return line;
-        } catch (IOException e) {
-            System.err.println("Wtf");
+        if (!file.exists()) {
+            throw new FileNotFoundException();
         }
-        return "";
-    }
 
-    public void writeFileText(String filePath) {
-        try {
-            File file = new File(filePath);
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line = "";
 
-            if (!file.exists()) {
-                throw new FileNotFoundException();
-            }
-            String needWrite = "";
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            writer.write(needWrite);
-            writer.close();
-        } catch (IOException e) {
-            System.err.println("wtf");
+        while ((line = br.readLine()) != null) {
+            System.out.print(line + " ");
         }
+        br.close();
+        return line;
     }
 }
