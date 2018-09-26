@@ -11,7 +11,7 @@ public class CopyFileText {
             fw.write(line);
             fw.close();
             System.out.println("Sau day la file text da duoc copy: ");
-            String readTarget = resource.readFileText("F:/target.txt");
+            resource.readFileText("F:/target.txt");
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
